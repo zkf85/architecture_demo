@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demonstration System</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+	<div class='container'>
+
+		<!-- navigation bar -->
+		<div class="navi">
+			<ul>
+				<li><a href="{% url 'tensorflow' %}">Tensorflow项目</a></li>
+				<li><a href="{% url 'pagerank' %}">PageRank项目</a></li>
+
+			</ul>
+		</div>
+
+		<!-- Page content -->
+		<div class="content">
+			<h1> Tensorflow项目演示系统</h1>
+			<form class="form-inline" action="">
+				<label for="param">参数1</label>
+				<input type="param" id="param1" placeholder="001" name="param1">
+				<label for="pwd">参数2</label>
+				<input type="param" id="param2" placeholder="002" name="param2">
+          <!--
+          <label>
+            <input type="checkbox" name="remember"> Remember me
+          </label>
+      -->
+      <button type="submit">确定</button>
+  </form>
+
+  <div id="demo">
+  	<h2>Let AJAX change this text</h2>
+  	<button type="button" onclick="loadDoc()">Change Content</button>
+  </div>
+
+
+  <body>
+  	<p>如果你点我，我就会消失。</p>
+  	<p>继续点我!</p>
+  	<p>接着点我!</p>
+  	<label for 'param'>参数a</label>
+  	<input type='param' id='a' placeholder='0'>
+  	<label for 'param'>参数b</label>
+  	<input type='param' id='b' placeholder='0'>
+  	<button type='submit' id='sum'> 相加</button>
+  	<label type='param' id='result'></label>
+
+  	<div>
+  		<button type='submit' id='refresh_chart'> 刷新图表</button>
+  	</div>
+
+  	<div class="chart-container" style="position: relative; height:20vh; width:40vw">
+  		<canvas id="myChart"></canvas>
+  	</div>
+
+  </div>
+
+  <div class='footer'>
+  	Footer
+  </div>
+
+</div>
+</body>
+</html>
+{% load static %}
+<script src='{% static 'demo/js/jquery.min.js' %}'></script>
+<link rel='stylesheet' href='{% static 'demo/css/main.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'demo/css/header.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'demo/css/footer.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'demo/css/Chart.min.css' %}' type='text/css' />
+<script src='{% static 'demo/js/Chart.min.js' %}' type='text/javascript'></script>
+<script src='{% static 'demo/js/main.js' %}' type='text/javascript'></script>

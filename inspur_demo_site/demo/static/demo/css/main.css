@@ -1,0 +1,86 @@
+/* font family */
+.sansserif{font-family:Arial,Helvetica,sans-serif;}
+
+/* header font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif;
+}
+/*  The side bar menu
+  KFZ 09/29/2019*/
+
+body {
+  margin: 0; 
+  padding: 0;
+}
+
+.container {
+  font-family: sans-serif;
+}
+
+.navi {
+  margin: 0;
+  padding: 12px;
+  background-color: #0F5CB1;  /* color of the Inspur Group */
+}
+
+.navi ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 20px;
+    z-index: 1; /* Stay on top */
+
+}
+.navi li {
+  display: inline;
+  padding: 10px;
+}
+
+.navi a
+{
+    color: #f1f1f1;
+    text-decoration: none;
+
+}
+
+/* Style page content */
+.content {
+  float: left;
+  width: 60%;
+  height: 100%;
+  padding: 24px 20px;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  font-family: sans-serif;
+}
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+  font-size:14px;
+}
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
