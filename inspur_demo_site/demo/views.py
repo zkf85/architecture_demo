@@ -4,13 +4,12 @@ import json
 
 # Create your views here.
 def tensorflow(request):
-    
   context = {
     }
-  if request.method == 'POST':
+  if request.method == 'POST': 
     print('post received')
-    text = request.POST.get('textfield', None)
-    context['text'] = text
+  text = request.POST.get('textfield', None)
+  context['text'] = text
 
   return render(request, 'demo/tensorflow.html', context)
 
@@ -29,3 +28,6 @@ def ajax_refresh_chart(request):
 
 def pagerank(request):
   return render(request, 'demo/pagerank.html')
+
+def test(request):
+  return render(request, 'demo/test.html')

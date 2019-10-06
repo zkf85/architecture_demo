@@ -9,45 +9,167 @@ h1, h2, h3, h4, h5, h6 {
   KFZ 09/29/2019*/
 
 body {
-  margin: 0; 
-  padding: 0;
-}
-
-.container {
-  font-family: sans-serif;
-}
-
-.navi {
+  //background-color: yellow;
   margin: 0;
-  padding: 12px;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* navigation bar */
+.navi {
   background-color: #0F5CB1;  /* color of the Inspur Group */
+  height: 48px;
+  margin: 0;
+  padding: 0 80px;
+  z-index: 1; /* Stay on top */
+  display: flex;
+}
+.logo-box {
+  //background-color: cyan;
+  width: 360px;  
+  display: flex;
+}
+.logo {
+  //background-color: purple;
+  margin-top: 4px;
+  width: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  width: 100%;
+  filter: brightness(100);
+}
+.logo-text {
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-text a {
+  //background-color: cyan;
+  color: #f1f1f1;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.navi ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0 20px;
-    z-index: 1; /* Stay on top */
+.project-box {
+  //background-color: green;
+  flex-grow: 1;
+  display: flex;
 
 }
-.navi li {
-  display: inline;
-  padding: 10px;
-}
-
-.navi a
-{
-    color: #f1f1f1;
-    text-decoration: none;
+.project-item {
+  //background-color: magenta;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 
-/* Style page content */
+.project-item a {
+  //background-color: purple;
+  color: #f1f1f1;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.language-box {
+  //background-color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.language-box a {
+  //background-color: cyan;
+  color: #f1f1f1;
+  font-size: 14px;
+}
+
+.title {
+  //background-color: chocolate;
+  height: 56px;
+  padding: 0 80px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+}
+.title-item {
+  //background-color: salmon;
+  width: 100%;
+  height:  28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title-item-title {
+  //background-color: green;
+  font-size: 22px;
+}
+.title-item-intro  {
+  //background-color: royalblue;
+  font-size: 14px;
+  color: gray;
+}
+
+/* content */
 .content {
+  //background-color: green;
   float: left;
+  padding: 10px 80px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justfity-content: center;
+}
+
+.row-1 {
+  //background-color: salmon;
+  height: 350px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.row-1-block-1 {
+  background-color: aliceblue;
   width: 60%;
   height: 100%;
-  padding: 24px 20px;
+}
+.row-1-block-2 {
+  background-color: honeydew;
+  width: 40%;
+  height: 100%;
+}
+
+.row-break {
+  background-color: ivory;
+  width: 100%;
+  height: 10px;
+}
+
+.row-2 {
+  //background-color: lightsalmon;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.row-2-block-1 {
+  background-color: snow;
+  width: 50%;
+  height: 100%;
+}
+.row-2-block-2 {
+  background-color: azure;
+  width: 50%;
+  height: 100%;
 }
 
 .form-inline {
@@ -60,15 +182,15 @@ body {
   margin: 5px 10px 5px 0;
 }
 .form-inline input {
+  background-color: #fff;
   vertical-align: middle;
   margin: 5px 10px 5px 0;
   padding: 10px;
-  background-color: #fff;
   border: 1px solid #ddd;
 }
 .form-inline button {
-  padding: 10px 20px;
   background-color: dodgerblue;
+  padding: 10px 20px;
   border: 1px solid #ddd;
   color: white;
   cursor: pointer;
@@ -78,6 +200,12 @@ body {
   background-color: royalblue;
 }
 
+.footer {
+  background-color: lightgray;
+  width: 100%;
+  height: 40px;
+  margin: 20px 0 0;
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {

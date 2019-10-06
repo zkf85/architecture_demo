@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Flex 布局练习 KFZ</title>
+</head>
+
+<body>
+  <div class='content'>
+
+	<h1>Flex 布局示例</h1>
+	<p>感谢阮一峰老师的教程<a target="_blank" href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a>
+	<br>本示例将教程上所有的布局都简单的实现了一遍，并保存GitHub上面
+	<br><a href="https://github.com/JailBreakC/flex-box-demo">https://github.com/JailBreakC/flex-box-demo</a></p>
+	<h2>容器的属性</h2>
+	<h3>1、flex-direction属性</h3>
+	<p>flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
+	<p>
+		.box {
+		    flex-direction: row | row-reverse | column | column-reverse;
+		}
+	</p>
+	<div class="box box-1">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+	<div class="box box-1">
+		<div class="box-item">1</div>
+		<div class="box-item">2</div>
+		<div class="box-item">3</div>
+		<div class="box-item">4</div>
+	</div>
+
+
+  </div>
+</body>
+</html>
+{% load static %}
+<script src='{% static 'demo/js/jquery.min.js' %}'></script>
+<link rel='stylesheet' href='{% static 'demo/css/style.css' %}' type='text/css' />
