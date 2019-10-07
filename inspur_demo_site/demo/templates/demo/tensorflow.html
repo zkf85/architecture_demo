@@ -33,34 +33,84 @@
 	<!-- Page content -->
 	<div class="content">
 		<div class='column-1'>
-			<div class="block-title">参数面板</div>
-
-			<form class="form-inline" action="">
-				<label for="param">Kernel Size</label>
-				<input type="param" id="kernel-size" placeholder="3" name="kernel-size">
-				<label for="pwd">Input Channel</label>
-				<input type="param" id="input-channel" placeholder="32" name="input-channel">
-				<label for="pwd">Output Channel</label>
-				<input type="param" id="output-channel" placeholder="64" name="output-channel">
-				<label for="pwd">Input Channel</label>
-				<input type="param" id="batch-size" placeholder="8" name="batch-size">
+			<div class="column-1-row-1">
+				<div class="block-title">参数面板</div>
+				<form class="form-inline" action="">
+					<label for="param">Kernel Size</label>
+					<input type="param" id="kernel-size" placeholder="3" name="kernel-size">
+					<label for="pwd">Input Channel</label>
+					<input type="param" id="input-channel" placeholder="32" name="input-channel">
+					<label for="pwd">Output Channel</label>
+					<input type="param" id="output-channel" placeholder="64" name="output-channel">
+					<label for="pwd">Input Channel</label>
+					<input type="param" id="batch-size" placeholder="8" name="batch-size">
+				</form>
 				<button type="submit">确定</button>
-			</form>
+
+			</div>
+
+			<div class="column-1-row-2">
+				<div class="block-title">控制面板</div>
+				<p>训练步数</p>
+				<label id='step'>0</label>
+				<button>开始</button>
+				<button>暂停</button>
+				<button>重置</button>
+			</div>
 		</div>
 
 		<div class="column-2">
-			<div class="column-block-1">
+			<div class="column-2-row-1">
 				<div class="block-title">训练效果</div>
-				<div class="column-block-1-item">Train</div>
-				<div class="column-block-1-item">Test</div>
+				<div class="column-2-row-1-row">
+					FPGA Test
+					<div class="row-block-container">
+				  	{% for label in label_list %}
+				  		<div class="img-block">
+				  			{% with 'demo/img/'|add:label|add:'.png' as img_static %}
+				  				<img src='{% static img_static %}'>
+				  			{% endwith %}
+								<div class="rank-list">
+									<label>{{label}}</label>
+									<div class="green-bar" id='fpga{{forloop.counter}}-bar1'></div>
+									<label id="fpga{{forloop.counter}}-label2">None</label>
+									<div class="red-bar" id="fpga{{forloop.counter}}-bar2"></div>
+									<label id="fpga{{forloop.counter}}-label3">None</label>
+									<div class="red-bar" id="fpga{{forloop.counter}}-bar3"></div>
+								</div>
+							</div>
+				  	{% endfor %}
+					</div>
+				</div>
+
+				<div class="column-2-row-1-row">
+					CPU Test
+				  <div class="row-block-container">
+				  	{% for label in label_list %}
+				  		<div class="img-block">
+				  			{% with 'demo/img/'|add:label|add:'.png' as img_static %}
+				  				<img src='{% static img_static %}'>
+				  			{% endwith %}
+								<div class="rank-list">
+									<label>{{label}}</label>
+									<div class="green-bar" id='cpu{{forloop.counter}}-bar1'></div>
+									<label id="cpu{{forloop.counter}}-label2">None</label>
+									<div class="red-bar" id="cpu{{forloop.counter}}-bar2"></div>
+									<label id="cpu{{forloop.counter}}-label3">None</label>
+									<div class="red-bar" id="cpu{{forloop.counter}}-bar3"></div>
+								</div>
+							</div>
+				  	{% endfor %}
+					</div>
+				</div>
 
 			</div>
 			
-			<div class="column-block-2">
+			<div class="column-2-row-2">
 				<div class="block-title">训练指标</div>
-				<div class="column-block-2-item">
-					<div class="column-block-2-item-split">Train</div>
-					<div class="column-block-2-item-split">Test</div>
+				<div class="column-2-row-2-row">
+					<div class="column-2-row-2-row-column">Train</div>
+					<div class="column-2-row-2-row-column">Test</div>
 
 				</div>
 
@@ -69,7 +119,7 @@
 		</div>
 
 		<div class="column-3">
-			<div class="column-block-1">
+			<div class="column-3-row-1">
 				<div class="block-title">单位计算时间</div>
 
 				<p>如果你点我，我就会消失。</p>
@@ -83,7 +133,7 @@
 				<label type='param' id='result'></label>
 			</div>
 
-			<div class="column-block-2">
+			<div class="column-3-row-2">
 				<div class="block-title">CPU与FPGA速度对比</div>
 				<div>
 					<button type='submit' id='refresh_chart'> 刷新图表</button>
@@ -98,7 +148,7 @@
 	</div>
 
 	<div class="footer">
-
+		{{ label_list }}
 	</div>
 
 </body>

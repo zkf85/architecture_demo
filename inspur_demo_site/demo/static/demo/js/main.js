@@ -1,6 +1,8 @@
 // KF 
 // 2019年 10月 02日 星期三 17:28:33 CST
 //alert('[kf info] im here!!!')
+var label_list = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'];
+
 
 $(document).ready(function(){
   $("p").click(function(){
@@ -8,21 +10,54 @@ $(document).ready(function(){
   });
 });
 
-$(document).ready(function(){
-  $('#sum').click(function(){
-    var a = $('#a').val();
-    var b = $('#b').val();
+// $(document).ready(function(){
+//   $('#sum').click(function(){
+//     var a = $('#a').val();
+//     var b = $('#b').val();
+//     $.ajax({
+//       type: 'GET',
+//       url: '/ajax/add/',
+//       data: {'a':a, 'b':b},
+//       data_type: 'json',
+//       success: function(ret){
+//         $('#result').html(ret.result)
+//         }
+//     })
+//   });  
+// });
+
+$(document).ready(function() {
+  $('#sum').click(function() {
+    var step = $('#a').val();
     $.ajax({
       type: 'GET',
-      url: '/ajax/add/',
-      data: {'a':a, 'b':b},
+      url: '/ajax/update_all/',
+      data: { 'step': step},
       data_type: 'json',
-      success: function(ret){
-        $('#result').html(ret.result)
-        }
+      success: function(ret) {
+          $('#result').html(ret.plane)
+          $('#fpga1-bar1').width(ret.plane[0]*100 + '%')
+          $('#fpga1-label2').text(label_list[ret.plane[1]])
+          $('#fpga1-bar2').width(ret.plane[2]*100 + '%')
+          $('#fpga1-label3').text(label_list[ret.plane[3]])
+          $('#fpga1-bar3').width(ret.plane[4]*100 + '%')
+        // for (i=0; i < label_list.length; i++) {
+        //   l = label_list[i]
+        //   ret_list = ret.'${l}'
+        //   alert(ret_list)
+          // $('#fpga1-bar1').width(ret.l[0])
+
+          // $('#result').html(ret)
+           // $('#a1-bar1').width(ret.l.get(0)*100 + '%')
+          // $('#a1-label2').text(label_list[ret.label_list[i][1]])
+          // $('#a1-bar2').width(ret[label_list[i]][2]*100 + '%')
+          // $('#a1-label3').text(label_list[ret.label_list[i][3]])
+          // $('#a1-bar3').width(ret.label_list[i][4]*100 + '%')
+        // }
+      }      
     })
-  });  
-});
+  })
+})
 
 $(document).ready(function(){
   $('#refresh_chart').click(function(){

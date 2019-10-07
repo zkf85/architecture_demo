@@ -14,5 +14,6 @@ urlpatterns = [
     path('test/', views.test, name='test'),
     path('ajax/add/', views.ajax_test_add, name='ajax_test_add'),
     path('ajax/refresh_chart/', views.ajax_refresh_chart, name='ajax_refresh_chart'),
+    path('ajax/update_all/', views.ajax_update_all, name='ajax_update_all'),
     path('pagerank/', views.pagerank, name='pagerank'),
 ]
