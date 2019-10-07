@@ -3,88 +3,103 @@
 <head>
 	<title>Demonstration System</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  {% load static %}
+	{% load static %}
 </head>
 
 <body>
 
-		<!-- navigation bar -->
-		<div class="navi">
-      <div class='logo-box'>
-        <div class='logo'>
-          <img src='{% static 'demo/img/320px-inspur.png' %}' alt='Inspur LOGO'>
-        </div>
-        <div class='logo-text'><a>体系结构研究部一处 项目演示平台</a></div>
-      </div>
-      <div class='project-box'>
-        <div class='project-item'><a href="{% url 'tensorflow' %}">Tensorflow</a></div>
-        <div class='project-item'><a href="{% url 'pagerank' %}">PageRank</a></div>
-      </div>
-      <div class='language-box'><a>语言切换</a></div>
+	<!-- navigation bar -->
+	<div class="navi">
+		<div class='logo-box'>
+			<div class='logo'>
+				<img src='{% static 'demo/img/320px-inspur.png' %}' alt='Inspur LOGO'>
+			</div>
+			<div class='logo-text'><a>体系结构研究部一处 项目演示平台</a></div>
+		</div>
+		<div class='project-box'>
+			<div class='project-item'><a href="{% url 'tensorflow' %}">Tensorflow</a></div>
+			<div class='project-item'><a href="{% url 'pagerank' %}">PageRank</a></div>
+		</div>
+		<div class='language-box'><a>语言切换</a></div>
+	</div>
+
+	<div class='title'>
+		<div class='title-item'>
+			<div class='title-item-title'>Tensorflow异构项目</div>
+			<div class='title-item-intro'>项目简介</div>
+		</div>
+	</div>
+
+	<!-- Page content -->
+	<div class="content">
+		<div class='column-1'>
+			<div class="block-title">参数面板</div>
+
+			<form class="form-inline" action="">
+				<label for="param">Kernel Size</label>
+				<input type="param" id="kernel-size" placeholder="3" name="kernel-size">
+				<label for="pwd">Input Channel</label>
+				<input type="param" id="input-channel" placeholder="32" name="input-channel">
+				<label for="pwd">Output Channel</label>
+				<input type="param" id="output-channel" placeholder="64" name="output-channel">
+				<label for="pwd">Input Channel</label>
+				<input type="param" id="batch-size" placeholder="8" name="batch-size">
+				<button type="submit">确定</button>
+			</form>
 		</div>
 
-    <div class='title'>
-      <div class='title-item'>
-        <div class='title-item-title'>Tensorflow异构项目</div>
-        <div class='title-item-intro'>项目简介</div>
-      </div>
-    </div>
+		<div class="column-2">
+			<div class="column-block-1">
+				<div class="block-title">训练效果</div>
+				<div class="column-block-1-item">Train</div>
+				<div class="column-block-1-item">Test</div>
 
-		<!-- Page content -->
-		<div class="content">
-      <div class='row-1'>
-        <div class='row-1-block-1'>
-          <form class="form-inline" action="">
-            <label for="param">参数1</label>
-            <input type="param" id="param1" placeholder="001" name="param1">
-            <label for="pwd">参数2</label>
-            <input type="param" id="param2" placeholder="002" name="param2">
-            <button type="submit">确定</button>
-          </form>
+			</div>
+			
+			<div class="column-block-2">
+				<div class="block-title">训练指标</div>
+				<div class="column-block-2-item">
+					<div class="column-block-2-item-split">Train</div>
+					<div class="column-block-2-item-split">Test</div>
 
-          <div id="demo">
-            <h2>Let AJAX change this text</h2>
-            <button type="button" onclick="loadDoc()">Change Content</button>
-          </div>
+				</div>
 
-          <p>如果你点我，我就会消失。</p>
-          <p>继续点我!</p>
-          <p>接着点我!</p>
-          <label for 'param'>参数a</label>
-          <input type='param' id='a' placeholder='0'>
-          <label for 'param'>参数b</label>
-          <input type='param' id='b' placeholder='0'>
-          <button type='submit' id='sum'> 相加</button>
-          <label type='param' id='result'></label>
+			</div>
 
-        </div>
+		</div>
 
-        <div class='row-1-block-2'>
-        </div>
+		<div class="column-3">
+			<div class="column-block-1">
+				<div class="block-title">单位计算时间</div>
 
-      </div>
+				<p>如果你点我，我就会消失。</p>
+				<p>继续点我!</p>
+				<p>接着点我!</p>
+				<label for 'param'>参数a</label>
+				<input type='param' id='a' placeholder='0'>
+				<label for 'param'>参数b</label>
+				<input type='param' id='b' placeholder='0'>
+				<button type='submit' id='sum'> 相加</button>
+				<label type='param' id='result'></label>
+			</div>
 
-      <div class='row-break'></div>
+			<div class="column-block-2">
+				<div class="block-title">CPU与FPGA速度对比</div>
+				<div>
+					<button type='submit' id='refresh_chart'> 刷新图表</button>
+				</div>
 
+				<div class="chart-container">
+					<canvas id="myChart"></canvas>
+				</div>
+			</div>
+		
+		</div>
+	</div>
 
-      <div class='row-2'>
-        <div class='row-2-block-1'>
-        </div>
-        <div class='row-2-block-2'>
-          <div>
-            <button type='submit' id='refresh_chart'> 刷新图表</button>
-          </div>
+	<div class="footer">
 
-          <div class="chart-container" style="position: relative; height:20vh; width:40vw">
-            <canvas id="myChart"></canvas>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-
-    <div class='footer'>This is footer</div>
+	</div>
 
 </body>
 </html>
