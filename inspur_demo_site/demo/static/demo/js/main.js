@@ -13,6 +13,7 @@ $(document).ready(function(){
 step = 0;
 max_step = 500;
 timer_interval = 50;
+step_increment  = 10;
 /* make a stop watch */
 var start = document.getElementById('start'),
 stop= document.getElementById('stop'),
@@ -22,7 +23,7 @@ t;
 function add() {
   step += 1;
   step_text.textContent = step;
-  if (step % 10 == 0) {
+  if (step % step_increment == 0) {
       $.ajax({
         type: 'GET',
         url: '/ajax/update_all/',
@@ -44,11 +45,12 @@ function add() {
             $(`#cpu${i+1}-label3`).text(label_list[ret['cpu'][label_list[i]][3]])
             $(`#cpu${i+1}-bar3`).width(ret['cpu'][label_list[i]][4]*100 + '%')
           }
-            // $('#fpga1-bar1').width(ret.label_list[[0]*100 + '%')
-            // $('#fpga1-label2').text(label_list[ret.plane[1]])
-            // $('#fpga1-bar2').width(ret.plane[2]*100 + '%')
-            // $('#fpga1-label3').text(label_list[ret.plane[3]])
-            // $('#fpga1-bar3').width(ret.plane[4]*100 + '%')
+            lossChart.data.datasets[0].data.push(ret['loss_acc'][0]);
+            lossChart.data.datasets[1].data.push(ret['loss_acc'][1]);
+            lossChart.update();
+            accChart.data.datasets[0].data.push(ret['loss_acc'][2]);
+            accChart.data.datasets[1].data.push(ret['loss_acc'][3]);
+            accChart.update();
         }      
       })
     }
@@ -74,92 +76,243 @@ reset.onclick = function() {
   step = 0
   $('.green-bar').animate({width:'2px'}, 500)
   $('.red-bar').animate({width:'2px'}, 500)
+  // clear loss chart
+  lossChart.data.datasets.forEach((dataset) => {
+    dataset.data = [];
+  });
+  lossChart.update();
+  // clear acc chart
+  accChart.data.datasets.forEach((dataset) => {
+    dataset.data = [];
+  });
+  accChart.update();
 }
 
+/* draw charts */
+step_labels = new Array()
+for(i=0; i<=max_step; i+=step_increment) {
+  step_labels.push(i)
+}
+ctx_loss = document.getElementById('lossChart').getContext('2d');
+lossChart = new Chart(ctx_loss, {
+    type: 'line',
+    data: {
+        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //labels: [0,1,2,3,4,5,6,7,8,9,10],
+        //labels:['0', '10', '20', '30', '40'],
+        labels: step_labels,
+        datasets: [
+            {
+                label: 'FPGA',
+                fill: false,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(200,187,205,1)",//数据曲线颜色
+                pointBackgroundColor: "#fff", //数据点的颜色
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
 
-/* update column2-row-1 */
-$(document).ready(function() {
-  $('#sum').click(function() {
-    var step = $('#a').val();
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/update_all/',
-      data: { 'step': step},
-      data_type: 'json',
-      success: function(ret) {
-          $('#result').html(ret.plane)
-          $('#fpga1-bar1').width(ret.plane[0]*100 + '%')
-          $('#fpga1-label2').text(label_list[ret.plane[1]])
-          $('#fpga1-bar2').width(ret.plane[2]*100 + '%')
-          $('#fpga1-label3').text(label_list[ret.plane[3]])
-          $('#fpga1-bar3').width(ret.plane[4]*100 + '%')
-        // for (i=0; i < label_list.length; i++) {
-        //   l = label_list[i]
-        //   ret_list = ret.'${l}'
-        //   alert(ret_list)
-          // $('#fpga1-bar1').width(ret.l[0])
+                borderWidth: 1
+            },
+            {
+                label: 'CPU',
+                fill: false,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(75,192,192,1)",//数据曲线颜色
+                pointBackgroundColor: "#f1f", //数据点的颜色
+                data: [],
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
 
-          // $('#result').html(ret)
-           // $('#a1-bar1').width(ret.l.get(0)*100 + '%')
-          // $('#a1-label2').text(label_list[ret.label_list[i][1]])
-          // $('#a1-bar2').width(ret[label_list[i]][2]*100 + '%')
-          // $('#a1-label3').text(label_list[ret.label_list[i][3]])
-          // $('#a1-bar3').width(ret.label_list[i][4]*100 + '%')
-        // }
-      }      
-    })
-  })
-})
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        maintainAspectRatio : false,
+        title:{
+            display:false,
+            text:'训练loss曲线',
+            fontSize : 20,
+        },
+        //不禁用动画
+        animation:{
+            duration:0,
+        },
 
-$(document).ready(function(){
-  $('#refresh_chart').click(function(){
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/refresh_chart/',
-      //data: {'a':a, 'b':b},
-      //data_type: 'json',
-      success: function(ret){
-        myChart.data.datasets[0].data = ret.list
-        myChart.update()
+        //提示功能
+        tooltips:{
+          enable:true
+        },
+        //顶部的文字提示
+        legend:{
+          display:true,
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                    min: 0,
+                    max: max_step,
+                    stepSize: 100,
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 1.2,
+                    min: 0,
+                    stepSize: 0.3
+                }
+            }]
         }
-    })
-  });
-});
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(255, 159, 64, 0.2)'
-    ],
-    borderColor: [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgba(255, 159, 64, 1)'
-    ],
-    borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-        }]
-      }
     }
 });
+
+ctx_acc = document.getElementById('accChart').getContext('2d');
+accChart = new Chart(ctx_acc, {
+    type: 'line',
+    data: {
+        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //labels: [0,1,2,3,4,5,6,7,8,9,10],
+        //labels:['0', '10', '20', '30', '40'],
+        labels: step_labels,
+        datasets: [
+            {
+                label: 'FPGA',
+                fill: false,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(200,187,205,1)",//数据曲线颜色
+                pointBackgroundColor: "#fff", //数据点的颜色
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+
+                borderWidth: 1
+            },
+            {
+                label: 'CPU',
+                fill: false,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: "rgba(75,192,192,1)",//数据曲线颜色
+                pointBackgroundColor: "#f1f", //数据点的颜色
+                data: [],
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        maintainAspectRatio : false,
+        title:{
+            display:false,
+            text:'训练Acc曲线',
+            fontSize : 20,
+        },
+        //不禁用动画
+        animation:{
+            duration:0,
+        },
+
+        //提示功能
+        tooltips:{
+          enable:true
+        },
+        //顶部的文字提示
+        legend:{
+          display:true,
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                    min: 0,
+                    max: max_step,
+                    stepSize: 100,
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 1,
+                    min: 0,
+                    stepSize: 0.25
+                }
+            }]
+        }
+    }
+});
+
+ctx_conv = document.getElementById('conv_compare').getContext('2d');
+conv_compare = new Chart(ctx_conv, {
+    type: 'bar',
+    data: {
+        labels: ['CPU', 'FPGA'],
+        datasets: [
+            {
+                label: 'Conv Speed',
+                fill: true,  //是否要显示数据部分阴影面积块  false:不显示
+                borderColor: [
+                    "rgba(200,187,205,1)",
+                    'rgba(54, 162, 235, 1)',
+                ],//数据曲线颜色
+                pointBackgroundColor: "#fff", //数据点的颜色
+                data: [2700, 27000],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                barStrokeWidth: '4',
+
+                borderWidth: 2
+            },
+
+        ]
+    },
+    options: {
+        maintainAspectRatio : false,
+        title:{
+            display:true,
+            text:'卷积运行时间 CPU VS FPGA',
+            fontSize : 14,
+        },
+        //不禁用动画
+        animation:{
+            duration:5000,
+        },
+        hover:{
+            animationDuration:1,
+        },
+        responsiveAnimationDuration: 1,
+        //提示功能
+        tooltips:{
+          enable:true
+        },
+        //顶部的文字提示
+        legend:{
+          display:true,
+        },
+        scales: {
+            xAxes:[{
+                //轴标题
+                scaleLabel:{
+                    display:true,
+                    labelString:'设备',
+                    fontColor:'#666'
+                },
+                //网格显示
+                gridLines:{
+                    display:true
+                },
+            }],
+
+            yAxes: [{
+                scaleLabel:{
+                    display:true,
+                        labelString:'时间(us)'
+                },
+                gridLines:{
+                    display:true
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+

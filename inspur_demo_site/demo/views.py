@@ -8,11 +8,15 @@ import os
 
 fpga_data_file_path = 'data/test_fpga_500.json'
 cpu_data_file_path = 'data/test_cpu_500.json'
+#cpu_data_file_path = 'data/inference_data_cpu2.json'
+loss_acc_file_path = 'data/test_data_loss_acc.json'
 
 with open(os.path.join(settings.BASE_DIR, 'demo', cpu_data_file_path), 'r') as f:
   cpu_data = json.load(f)
 with open(os.path.join(settings.BASE_DIR, 'demo', fpga_data_file_path), 'r') as f:
   fpga_data = json.load(f)
+with open(os.path.join(settings.BASE_DIR, 'demo', loss_acc_file_path), 'r') as f:
+  loss_acc_data = json.load(f)
 label_list = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 # Create your views here.
@@ -31,9 +35,12 @@ def ajax_update_all(request):
   #print('[kf info] request step is: %s' % step)
   #print('[kf info] step data is:', fpga_data.get(step))
   #cpu_return_json = cpu_data.get(step)
+  #print(loss_acc_data.get(step))
   return_json = {}
   return_json['fpga'] = fpga_data.get(step)
   return_json['cpu'] = cpu_data.get(step)
+  return_json['loss_acc'] = loss_acc_data.get(step)
+
   return HttpResponse(json.dumps(return_json), content_type='application/json')
 
 

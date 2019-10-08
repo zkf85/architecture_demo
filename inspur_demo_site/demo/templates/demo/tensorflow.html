@@ -109,7 +109,7 @@
 					  	{% endfor %}
 						</div>
 					</div>
-					
+
 				</div>
 
 			</div>
@@ -117,8 +117,18 @@
 			<div class="column-2-row-2">
 				<div class="block-title">训练指标</div>
 				<div class="column-2-row-2-row">
-					<div class="column-2-row-2-row-column">Train</div>
-					<div class="column-2-row-2-row-column">Test</div>
+					<div class="column-2-row-2-row-column">
+						<div class="row-block-subtitle-2">Train Loss</div>
+						<div class="column-2-row-2-row-column-container">
+							<canvas id="lossChart"></canvas>
+						</div>
+					</div>
+					<div class="column-2-row-2-row-column">
+						<div class="row-block-subtitle-2">Train Accuracy</div>
+						<div class="column-2-row-2-row-column-container">
+							<canvas id="accChart"></canvas>
+						</div>
+					</div>
 
 				</div>
 
@@ -129,27 +139,14 @@
 		<div class="column-3">
 			<div class="column-3-row-1">
 				<div class="block-title">单位计算时间</div>
-
-				<p>如果你点我，我就会消失。</p>
-				<p>继续点我!</p>
-				<p>接着点我!</p>
-				<label for 'param'>参数a</label>
-				<input type='param' id='a' placeholder='0'>
-				<label for 'param'>参数b</label>
-				<input type='param' id='b' placeholder='0'>
-				<button type='submit' id='sum'> 相加</button>
-				<label type='param' id='result'></label>
+				<div class="column-3-row-container">
+						<canvas id="conv_compare"></canvas>
+				</div>
 			</div>
 
 			<div class="column-3-row-2">
 				<div class="block-title">CPU与FPGA速度对比</div>
-				<div>
-					<button type='submit' id='refresh_chart'> 刷新图表</button>
-				</div>
 
-				<div class="chart-container">
-					<canvas id="myChart"></canvas>
-				</div>
 			</div>
 		
 		</div>
