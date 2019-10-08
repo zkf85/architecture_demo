@@ -65,7 +65,6 @@ body {
   font-size: 16px;
   //font-weight: bold;
 }
-
 .project-box {
   //background-color: green;
   flex-grow: 1;
@@ -75,32 +74,40 @@ body {
 }
 .project-item {
   //background-color: magenta;
-  width: 120px;
-
+  width: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-}
-
-.project-item a {
-  //background-color: purple;
-  color: #f1f1f1;
-  font-size: 14px;
-  text-decoration: none;
 }
 
 .language-box {
   //background-color: purple;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.language-box a {
-  //background-color: cyan;
+.project-item a, .language-box a {
+  //background-color: purple;
+  position: relative;
   color: #f1f1f1;
   font-size: 14px;
+  text-decoration: none;
+}
+.project-item a:hover, .language-box a:hover {
+  transition: color 0.2s;
+  color: lightgray;
+}
+.project-item a:after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 0%;
+  border-bottom: 4px solid lightgray;
+  transition: 0.2s;
+}
+.project-item a:hover:after {
+  width: 100%; 
 }
 
 .title {
@@ -127,10 +134,17 @@ body {
   //background-color: green;
   font-size: 22px;
 }
-.title-item-intro  {
+.title-item-intro a {
   //background-color: royalblue;
   font-size: 14px;
   color: gray;
+  text-decoration: none;
+}
+.title-item-intro a:hover {
+  transition: color 0.2s;
+  //color: #0F5CB1;
+  color: dodgerblue;
+  
 }
 
 /* content */
@@ -294,7 +308,8 @@ body {
   flex-direction: column;
 }
 .img-block img {
-  width: 70%;
+  //width: 70%;
+  width: 3vw;
 }
 .rank-list {
   //background-color: ghostwhite;
@@ -420,9 +435,13 @@ button {
   width: 80px;  
 }
 button:hover {
+  transition: background-color 0.2s;
   background-color: dodgerblue;
 }
-button:focus {outline:0;}
+button:focus {
+  outline:0;
+  background-color: dodgerblue;
+}
 
 canvas {
   max-width: 100%;
