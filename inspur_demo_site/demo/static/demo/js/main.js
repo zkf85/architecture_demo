@@ -58,7 +58,6 @@ function add() {
   if (step == max_step) {
     clearTimeout(t);
     step = 0;
-    console.log('im here')
     chart_3.data.datasets[0].data = chart_3_data;
     chart_4.data.datasets[0].data = chart_4_data;
     chart_3.update();
@@ -92,6 +91,10 @@ reset.onclick = function() {
     dataset.data = [];
   });
   accChart.update();
+  chart_3.data.datasets[0].data = [];
+  chart_4.data.datasets[0].data = [];
+  chart_3.update();
+  chart_4.update();
 }
 
 /* draw charts */
@@ -309,6 +312,10 @@ var chart_3 = new Chart(ctx_3, {
                 gridLines:{
                     display:true
                 },
+                ticks: {
+                beginAtZero: true,
+                max: 30000
+                } 
             }],
             yAxes: [{
                 scaleLabel:{
@@ -399,7 +406,8 @@ chart_4 = new Chart(ctx_4, {
                   display:true
               },
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                max: 30000
               }
           }]
       }
