@@ -147,7 +147,7 @@ body {
 
 .column-1 {
   //background-color: ghostwhite;
-  width: 15%;
+  min-width: 15%;
   height: inherit;
 
   display: flex;
@@ -160,7 +160,6 @@ body {
   width: 62%;
   height: inherit;
   margin-left: 10px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -170,7 +169,6 @@ body {
   height: inherit;
   margin-left: 10px;
   flex-grow: 1;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -296,11 +294,11 @@ body {
   flex-direction: column;
 }
 .img-block img {
-  width: 5vh;
+  width: 70%;
 }
 .rank-list {
   //background-color: ghostwhite;
-  width: 5vh;
+  width: 70%;
   //padding: 0 5px;
   box-sizing:border-box;
 
@@ -372,7 +370,7 @@ body {
   width: 100%;
   padding: 0 20px 0 0;
   box-sizing: border-box;
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   }
@@ -402,7 +400,7 @@ body {
   background-color: #fff;
   vertical-align: middle;
   margin: 4px;
-  padding: 6px 8px;
+  padding: 4px 8px;
   width: 100%;
   border: 1px solid #ddd;
   box-sizing:border-box;
@@ -426,10 +424,8 @@ button:hover {
 }
 button:focus {outline:0;}
 
-.chart-container {
-  align-items: flex-start;
-  //width: 400px;
-  //height: 200px;
+canvas {
+  max-width: 100%;
 }
 
 .footer {
