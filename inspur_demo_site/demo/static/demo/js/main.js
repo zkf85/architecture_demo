@@ -12,7 +12,7 @@ $(document).ready(function(){
 /* universal variable */
 step = 0;
 max_step = 500;
-timer_interval = 50;
+timer_interval = 10;
 step_increment  = 10;
 /* make a stop watch */
 var start = document.getElementById('start'),
@@ -56,12 +56,18 @@ function add() {
     }
   timer();
   if (step == max_step) {
-    clearTimeout(t)
-    step = 0
+    clearTimeout(t);
+    step = 0;
+    console.log('im here')
+    chart_3.data.datasets[0].data = chart_3_data;
+    chart_4.data.datasets[0].data = chart_4_data;
+    chart_3.update();
+    chart_4.update();
   }
 }
 function timer() {
   t = setTimeout(add, timer_interval);
+
 }
 /* Start button */
 start.onclick = timer;
@@ -93,8 +99,8 @@ step_labels = new Array()
 for(i=0; i<=max_step; i+=step_increment) {
   step_labels.push(i)
 }
-ctx_loss = document.getElementById('lossChart').getContext('2d');
-lossChart = new Chart(ctx_loss, {
+ctx_1 = document.getElementById('lossChart').getContext('2d');
+lossChart = new Chart(ctx_1, {
     type: 'line',
     data: {
         //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -165,8 +171,8 @@ lossChart = new Chart(ctx_loss, {
     }
 });
 
-ctx_acc = document.getElementById('accChart').getContext('2d');
-accChart = new Chart(ctx_acc, {
+ctx_2 = document.getElementById('accChart').getContext('2d');
+accChart = new Chart(ctx_2, {
     type: 'line',
     data: {
         //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -237,24 +243,33 @@ accChart = new Chart(ctx_acc, {
     }
 });
 
-ctx_conv = document.getElementById('conv_compare').getContext('2d');
-conv_compare = new Chart(ctx_conv, {
-    type: 'bar',
+chart_3_data = [509, 58, 24, 113, 23263, 418];
+var ctx_3 = document.getElementById('conv_steps').getContext('2d');
+var chart_3 = new Chart(ctx_3, {
+    type: 'horizontalBar',
     data: {
-        labels: ['CPU', 'FPGA'],
+        labels: ['write to FPGA', 'input transform', 'filter transform', 'padding', 'kernel run', 'read from FPGA'],
         datasets: [
             {
-                label: 'Conv Speed',
+                label: '每步所花时间',
                 fill: true,  //是否要显示数据部分阴影面积块  false:不显示
                 borderColor: [
                     "rgba(200,187,205,1)",
                     'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],//数据曲线颜色
                 pointBackgroundColor: "#fff", //数据点的颜色
-                data: [2700, 27000],
+                data: [],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],
                 barStrokeWidth: '4',
 
@@ -267,31 +282,27 @@ conv_compare = new Chart(ctx_conv, {
         maintainAspectRatio : false,
         title:{
             display:true,
-            text:'卷积运行时间 CPU VS FPGA',
+            text:'FPGA卷积花费时间',
             fontSize : 14,
         },
         //不禁用动画
         animation:{
             duration:5000,
         },
-        hover:{
-            animationDuration:1,
-        },
-        responsiveAnimationDuration: 1,
         //提示功能
         tooltips:{
-          enable:true
+            enable:true
         },
         //顶部的文字提示
         legend:{
-          display:true,
+            display:true,
         },
         scales: {
             xAxes:[{
                 //轴标题
                 scaleLabel:{
                     display:true,
-                    labelString:'设备',
+                    labelString:'时间(us)',
                     fontColor:'#666'
                 },
                 //网格显示
@@ -299,20 +310,100 @@ conv_compare = new Chart(ctx_conv, {
                     display:true
                 },
             }],
-
             yAxes: [{
                 scaleLabel:{
                     display:true,
-                        labelString:'时间(us)'
+                    labelString:'FPGA卷积步骤'
                 },
                 gridLines:{
                     display:true
                 },
                 ticks: {
-                  beginAtZero: true
+                    beginAtZero: true
                 }
             }]
         }
     }
 });
+
+chart_4_data = [2700, 27000];
+ctx_4 = document.getElementById('conv_speed').getContext('2d');
+chart_4 = new Chart(ctx_4, {
+  type: 'bar',
+  data: {
+      labels: ['CPU', 'FPGA'],
+      datasets: [
+          {
+              label: 'Conv Speed',
+              fill: true,  //是否要显示数据部分阴影面积块  false:不显示
+              borderColor: [
+                  "rgba(200,187,205,1)",
+                  'rgba(54, 162, 235, 1)',
+              ],//数据曲线颜色
+              pointBackgroundColor: "#fff", //数据点的颜色
+              data: [],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+              ],
+              barStrokeWidth: '4',
+
+              borderWidth: 2
+          },
+
+      ]
+  },
+  options: {
+      maintainAspectRatio : false,
+      title:{
+          display:true,
+          text:'卷积运行时间 CPU VS FPGA',
+          fontSize : 14,
+      },
+      //不禁用动画
+      animation:{
+          duration:5000,
+      },
+      hover:{
+          animationDuration:1,
+      },
+      responsiveAnimationDuration: 1,
+      //提示功能
+      tooltips:{
+        enable:true
+      },
+      //顶部的文字提示
+      legend:{
+        display:true,
+      },
+      scales: {
+          xAxes:[{
+              //轴标题
+              scaleLabel:{
+                  display:true,
+                  labelString:'设备',
+                  fontColor:'#666'
+              },
+              //网格显示
+              gridLines:{
+                  display:true
+              },
+          }],
+
+          yAxes: [{
+              scaleLabel:{
+                  display:true,
+                      labelString:'时间(us)'
+              },
+              gridLines:{
+                  display:true
+              },
+              ticks: {
+                beginAtZero: true
+              }
+          }]
+      }
+  }
+});
+
 
