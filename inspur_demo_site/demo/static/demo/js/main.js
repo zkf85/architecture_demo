@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 /* universal variable */
 step = 0;
-step_increment  = 500;
+step_increment  = 100;
 
 //max_step = 500;
 max_step = 32900;
