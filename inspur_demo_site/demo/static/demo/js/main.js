@@ -11,9 +11,11 @@ $(document).ready(function(){
 
 /* universal variable */
 step = 0;
-max_step = 500;
-timer_interval = 10;
-step_increment  = 10;
+step_increment  = 500;
+
+//max_step = 500;
+max_step = 32900;
+timer_interval = 0.1;
 /* make a stop watch */
 var start = document.getElementById('start'),
 stop= document.getElementById('stop'),

@@ -6,10 +6,12 @@ import os
 
 #print(settings.BASE_DIR)
 
-fpga_data_file_path = 'data/test_fpga_500.json'
-cpu_data_file_path = 'data/test_cpu_500.json'
-#cpu_data_file_path = 'data/inference_data_cpu2.json'
-loss_acc_file_path = 'data/test_data_loss_acc.json'
+#fpga_data_file_path = 'data/test_fpga_500.json'
+#cpu_data_file_path = 'data/test_cpu_500.json'
+#loss_acc_file_path = 'data/test_data_loss_acc.json'
+fpga_data_file_path = 'data/fpga_3290.json'
+cpu_data_file_path = 'data/cpu_3290.json'
+loss_acc_file_path = 'data/loss_acc_3290.json'
 
 with open(os.path.join(settings.BASE_DIR, 'demo', cpu_data_file_path), 'r') as f:
   cpu_data = json.load(f)
