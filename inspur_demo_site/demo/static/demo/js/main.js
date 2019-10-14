@@ -61,9 +61,13 @@ function add() {
     clearTimeout(t);
     step = 0;
     chart_3.data.datasets[0].data = chart_3_data;
-    chart_4.data.datasets[0].data = chart_4_data;
+    //chart_4.data.datasets[0].data = chart_4_data;
     chart_3.update();
-    chart_4.update();
+    //chart_4.update();
+    num1.innerHTML = '0.096';
+    num2.innerHTML = '1510';
+    num3.innerHTML = '33.556';
+
   }
 }
 function timer() {
@@ -94,9 +98,9 @@ reset.onclick = function() {
   });
   accChart.update();
   chart_3.data.datasets[0].data = [];
-  chart_4.data.datasets[0].data = [];
+  //chart_4.data.datasets[0].data = [];
   chart_3.update();
-  chart_4.update();
+  //chart_4.update();
 }
 
 /* draw charts */
@@ -335,6 +339,12 @@ var chart_3 = new Chart(ctx_3, {
     }
 });
 
+var num1 = document.getElementById('num1');
+var num2 = document.getElementById('num2');
+var num3 = document.getElementById('num3');
+
+
+/*
 chart_4_data = [2700, 27000];
 ctx_4 = document.getElementById('conv_speed').getContext('2d');
 chart_4 = new Chart(ctx_4, {
@@ -415,5 +425,4 @@ chart_4 = new Chart(ctx_4, {
       }
   }
 });
-
-
+*/
