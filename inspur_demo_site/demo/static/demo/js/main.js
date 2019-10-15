@@ -180,7 +180,7 @@ lossChart = new Chart(ctx_1, {
                     beginAtZero: true,
                     max: 5,
                     min: 0,
-                    stepSize: 0.3
+                    stepSize: 1
                 }
             }]
         }
