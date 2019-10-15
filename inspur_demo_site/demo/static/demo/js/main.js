@@ -178,7 +178,7 @@ lossChart = new Chart(ctx_1, {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    max: 1.2,
+                    max: 5,
                     min: 0,
                     stepSize: 0.3
                 }
