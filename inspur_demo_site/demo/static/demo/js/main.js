@@ -123,24 +123,26 @@ lossChart = new Chart(ctx_1, {
         labels: step_labels,
         datasets: [
             {
-                label: 'FPGA',
+                label: 'Train',
                 fill: false,  //是否要显示数据部分阴影面积块  false:不显示
-                borderColor: "rgba(200,187,205,1)",//数据曲线颜色
-                pointBackgroundColor: "#fff", //数据点的颜色
+                borderColor: "rgba(30,144,255, 0.6)",//数据曲线颜色
+                //pointBackgroundColor: "#fff", //数据点的颜色
                 data: [],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                backgroundColor: "rgba(30,144,255, 0.6)",
+                pointRadius: 1,
 
-                borderWidth: 1
+                borderWidth: 2
             },
             {
-                label: 'CPU',
+                label: 'Validation',
                 fill: false,  //是否要显示数据部分阴影面积块  false:不显示
-                borderColor: "rgba(75,192,192,1)",//数据曲线颜色
-                pointBackgroundColor: "#f1f", //数据点的颜色
+                borderColor: 'rgba(255,69,0, 0.6)',
+                //pointBackgroundColor: "#f1f", //数据点的颜色
                 data: [],
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                backgroundColor: 'rgba(255,69,0, 0.6)',
+                pointRadius: 1,
 
-                borderWidth: 1
+                borderWidth: 2
             }
         ]
     },
@@ -148,7 +150,7 @@ lossChart = new Chart(ctx_1, {
         maintainAspectRatio : false,
         title:{
             display:false,
-            text:'训练loss曲线',
+            text:'Loss曲线',
             fontSize : 20,
         },
         //不禁用动画
@@ -162,7 +164,7 @@ lossChart = new Chart(ctx_1, {
         },
         //顶部的文字提示
         legend:{
-          display:false,
+          display:true,
         },
         scales: {
             xAxes: [{
@@ -195,24 +197,24 @@ accChart = new Chart(ctx_2, {
         labels: step_labels,
         datasets: [
             {
-                label: 'FPGA',
+                label: 'Train',
                 fill: false,  //是否要显示数据部分阴影面积块  false:不显示
-                borderColor: "rgba(200,187,205,1)",//数据曲线颜色
-                pointBackgroundColor: "#fff", //数据点的颜色
+                //borderColor: "rgba(200,187,205,1)",//数据曲线颜色
+                borderColor: "rgba(30,144,255, 0.6)",//数据曲线颜色
+                backgroundColor: "rgba(30,144,255, 0.6)",
+                pointRadius: 1,
                 data: [],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-
-                borderWidth: 1
+                borderWidth: 2
             },
             {
-                label: 'CPU',
+                label: 'Validation',
                 fill: false,  //是否要显示数据部分阴影面积块  false:不显示
-                borderColor: "rgba(75,192,192,1)",//数据曲线颜色
-                pointBackgroundColor: "#f1f", //数据点的颜色
+                //borderColor: "rgba(75,192,192,1)",//数据曲线颜色
+                borderColor: 'rgba(255,69,0, 0.6)',
+                backgroundColor: 'rgba(255,69,0, 0.6)',
+                pointRadius: 1,
                 data: [],
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-
-                borderWidth: 1
+                borderWidth: 2
             }
         ]
     },
@@ -220,7 +222,7 @@ accChart = new Chart(ctx_2, {
         maintainAspectRatio : false,
         title:{
             display:false,
-            text:'训练Acc曲线',
+            text:'Accuracy曲线',
             fontSize : 20,
         },
         //不禁用动画
@@ -234,7 +236,7 @@ accChart = new Chart(ctx_2, {
         },
         //顶部的文字提示
         legend:{
-          display:false,
+          display:true,
         },
         scales: {
             xAxes: [{
