@@ -11,11 +11,12 @@ $(document).ready(function(){
 
 /* universal variable */
 step = 0;
-step_increment  = 100;
+step_increment  = 10;
 
 //max_step = 500;
-max_step = 32900;
-timer_interval = 0.1;
+//max_step = 32900;
+max_step = 5000;
+timer_interval = 10;
 /* make a stop watch */
 var start = document.getElementById('start'),
 stop= document.getElementById('stop'),
@@ -157,7 +158,7 @@ lossChart = new Chart(ctx_1, {
         },
         //顶部的文字提示
         legend:{
-          display:true,
+          display:false,
         },
         scales: {
             xAxes: [{
@@ -229,7 +230,7 @@ accChart = new Chart(ctx_2, {
         },
         //顶部的文字提示
         legend:{
-          display:true,
+          display:false,
         },
         scales: {
             xAxes: [{
