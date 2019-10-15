@@ -102,6 +102,10 @@ reset.onclick = function() {
   //chart_4.data.datasets[0].data = [];
   chart_3.update();
   //chart_4.update();
+  num1.innerHTML = '';
+  num2.innerHTML = '';
+  num3.innerHTML = '';
+
 }
 
 /* draw charts */
