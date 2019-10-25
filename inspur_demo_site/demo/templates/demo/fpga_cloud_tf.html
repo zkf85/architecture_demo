@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demonstration System</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% load static %}
+</head>
+
+<body>
+
+	<!-- navigation bar -->
+	<div class="navi">
+		<div class='logo-box'>
+			<div class='logo'>
+				<img src='{% static 'demo/img/320px-inspur.png' %}' alt='Inspur LOGO'>
+			</div>
+			<div class='logo-text'><a>Architecture Department Demos</a></div>
+		</div>
+		<div class='project-box'>
+		</div>
+		<div class='language-box'><a href="#">Language</a></div>
+	</div>
+
+	<div class='title'>
+		<div class='title-item'>
+			<div class='title-item-title'>Tensofflow Model Deployed on FPGA Cloud</div>
+			<div class='title-item-intro'><a href="#">More</a></div>
+		</div>
+	</div>
+
+	<!-- Page content -->
+	<div class="content">
+		<div class='column-1'>
+
+			<div class="column-1-row-1">
+				<div class="block-title">Data Flow</div>
+				<img src='{% static "demo/img/hello.jpg" %}'>
+				<div class="column-container">
+					
+					<div class="column-1-subtitle">Frame Number</div>
+					<div class="column-1-line">
+						<div class="column-1-number" id='num'></div>
+						<div class="column-1-unit">Fr</div>
+					</div>
+					<div class="column-1-subtitle">Throughput</div>
+					<div class="column-1-line">
+						<div class="column-1-number" id='fps'></div>
+						<div class="column-1-unit">FPS</div>
+					</div>
+					<div class="column-1-subtitle">Energy Efficiency</div>
+					<div class="column-1-line">
+						<div class="column-1-number" id='watt'></div>
+						<div class="column-1-unit">W/img</div>
+					</div>
+				</div>
+			</div>
+			<div class="column-1-row-2">
+				<div class="block-title">Control Panel</div>
+
+				<button id='start'>Start</button>
+				<button id='stop'>Stop</button>
+				<button id='reset'>Reset</button>
+			</div>
+		</div>
+
+		<div class="column-2">
+
+			<div class="column-2-row-1">
+				<div class="block-title">Sampled Inferences</div>
+				<div class="row-container">
+					<div class="column-2-row-1-block-1">
+						<img src='{% static "demo/img/hello.jpg" %}'>
+					</div>
+					<div class="column-2-row-1-block-2">
+						<div class="bar-label">Airplane</div>
+						<div class="green-bar"></div>
+						<div class="bar-label">cup</div>
+						<div class="red-bar"></div>
+						<div class="bar-label">human</div>
+						<div class="red-bar"></div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="column-2-row-2">
+				<div class="block-title">Charts</div>
+
+			</div>
+
+		</div>
+
+		<div class="column-3">
+			<div class="block-title">Introduction</div>
+
+		</div>
+
+	</div>
+
+	<div class="footer">
+	</div>
+
+</body>
+</html>
+<script src='{% static 'demo/js/jquery.min.js' %}'></script>
+<link rel='stylesheet' href='{% static 'demo/css/main.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'demo/css/fpga_cloud_tf.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'demo/css/Chart.min.css' %}' type='text/css' />
+<script src='{% static 'demo/js/Chart.min.js' %}' type='text/javascript'></script>
+<script src='{% static 'demo/js/fpga_cloud_tf.js' %}' type='text/javascript'></script>

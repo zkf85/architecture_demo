@@ -49,13 +49,6 @@ def ajax_update_all(request):
   return HttpResponse(json.dumps(return_json), content_type='application/json')
 
 
-def ajax_test_add(request):
-  print('[kf info] Im here!!!')
-  a = int(request.GET.get('a'))
-  b = int(request.GET.get('b'))
-  return_json = {'result': a+b}
-  return HttpResponse(json.dumps(return_json), content_type='application/json')
-
 def ajax_refresh_chart(request):
   print('[kf info] ajax_refresh_chart')
   return_json = {'list': list(range(10))[::-1]}
@@ -65,5 +58,7 @@ def ajax_refresh_chart(request):
 def pagerank(request):
   return render(request, 'demo/pagerank.html')
 
-def test(request):
-  return render(request, 'demo/test.html')
+
+def fpga_cloud_tf(request):
+    context = {}
+    return render(request, 'demo/fpga_cloud_tf.html', context)
