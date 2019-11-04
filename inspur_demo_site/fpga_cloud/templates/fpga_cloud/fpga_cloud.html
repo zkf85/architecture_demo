@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demonstration System</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% load static %}
+</head>
+
+<body>
+
+	<!-- navigation bar -->
+	<div class="navi">
+		<div class='logo-box'>
+			<div class='logo'>
+				<img src='{% static 'fpga_cloud/img/320px-inspur.png' %}' alt='inpur logo'>
+			</div>
+			<div class='logo-text'><a>Architecture Research Department Demo Platform</a></div>
+		</div>
+		<div class='project-box'>
+		</div>
+		<div class='language-box'><a href="#">Language</a></div>
+	</div>
+
+	<div class='title'>
+		<div class='title-item'>
+			<div class='title-item-title'><strong>FPGA Cloud</strong> Project</div>
+			<div class='title-item-intro'><a href="#">More</a></div>
+		</div>
+	</div>
+
+	<!-- Page content -->
+	<div class="content">
+		<div class='column-1'>
+
+			<div class="column-1-row-1">
+				<div class="block-title">Overview</div>
+
+			<p>
+				FPGA Cloud is a project aiming to enable communication between FPGAs directly. Traditionally, when a system operating with multiple FPGA, the workload is always organized and operated by CPU, including sending and receiving data to/from each FPGA board. The new <strong>FPGA Cloud</strong> technique presented by Inspur enables the "direct" talk between FPGAs through the network instead of CPU. Thus part of the workload that oringally on CPU can be unloaded to FPGA. Moreover, the latency of a large computing task on multiple FPGAs would be reduce significantly as the amount of FPGA boards grows.
+			</p>
+
+			</div>
+			<div class="column-1-row-2">
+				<div class="block-title">Original V.S. FPGA Cloud</div>
+				<div class="row-container">
+					<img class="preload" src='{% static "fpga_cloud/img/original.gif" %}'>
+					<img class="preload" src='{% static "fpga_cloud/img/fpga_cloud.gif" %}'>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="column-2">
+
+			<div class="column-2-row-1">
+				<div class="block-title">Data Flow</div>
+				<div class="row-container">
+					<div class="column-2-row-2-block-1">
+						<img src='{% static "fpga_cloud/img/hello.jpg" %}'>
+					</div>
+					<div class="column-2-row-2-block-2">
+						<div class="bar-label" id="top_1">Airplane</div>
+						<div class="green-bar"></div>
+						<div class="bar-label">cup</div>
+						<div class="red-bar"></div>
+						<div class="bar-label">human</div>
+						<div class="red-bar"></div>
+					</div>
+				</div>
+				<div class="column-container">
+					
+					<div class="column-1-subtitle">Frame Number</div>
+					<div class="column-1-line">
+						<div class="column-1-number" id='step'></div>
+						<div class="column-1-unit">Fr</div>
+					</div>
+					<div class="column-1-subtitle">Energy Efficiency</div>
+					<div class="column-1-line">
+						<div class="column-1-number" id='watt'></div>
+						<div class="column-1-unit">W/img</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="column-2-row-2">
+				<div class="block-title">Control Panel</div>
+
+					<div class="timer-block">
+						<button id='start'>Start</button>
+						<button id='stop'>Stop</button>
+						<button id='reset'>Reset</button>
+					</div>
+
+			</div>
+			
+
+		</div>
+
+	</div>
+
+	<div class="footer">
+		<p>
+			Architecture Research Department  |  Inspur (Beijing) Electronic Information Industry Co., Ltd.
+			 |  Address: 6th Floor, Block C, 2 Shangdi Information Road, Haidian District, Beijing
+		</p>
+	</div>
+
+</body>
+</html>
+<script src='{% static 'fpga_cloud/js/jquery.min.js' %}'></script>
+<link rel='stylesheet' href='{% static 'fpga_cloud/css/main.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'fpga_cloud/css/fpga_cloud.css' %}' type='text/css' />
+<link rel='stylesheet' href='{% static 'fpga_cloud/css/Chart.min.css' %}' type='text/css' />
+<script src='{% static 'fpga_cloud/js/Chart.min.js' %}' type='text/javascript'></script>
+<script src='{% static 'fpga_cloud/js/fpga_cloud.js' %}' type='text/javascript'></script>

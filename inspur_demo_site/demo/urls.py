@@ -10,8 +10,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.fpga_cloud_tf, name='fpga_cloud_tf'),
-    path('tf/', views.tensorflow, name='tensorflow'),
+    path('', views.tensorflow, name='tensorflow'),
     path('pagerank/', views.pagerank, name='pagerank'),
     path('ajax/refresh_chart/', views.ajax_refresh_chart, name='ajax_refresh_chart'),
     path('ajax/update_all/', views.ajax_update_all, name='ajax_update_all'),

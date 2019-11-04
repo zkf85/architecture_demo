@@ -2,13 +2,13 @@ button {
   background-color: #0F5CB1;
   opacity: 0.8;
   margin: 0px 10px 0px;
-  padding: 6px 20px;
   border: 1px solid #ddd;
-  border-radius: 24px;
+  border-radius: 36px;
   color: white;
   cursor: pointer;
   font-size:18px;
-  width: 120px;  
+  width: 72px;  
+  height: 72px;
 }
 button:hover {
   transition: background-color 0.2s;
@@ -27,7 +27,7 @@ canvas {
 .content {
   //background-color: green;
   float: left;
-  padding: 10px 40px;
+  padding: 10px 80px;
   flex-grow: 1;
 
   display: flex;
@@ -43,7 +43,7 @@ canvas {
 }
 
 .column-container {
-  background-color: ivory;
+  //background-color: ivory;
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -53,7 +53,7 @@ canvas {
 }
 
 .row-container {
-  background-color: lightgray;
+  //background-color: lightgray;
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -63,7 +63,7 @@ canvas {
 
 .column-1 {
   //background-color: ghostwhite;
-  width: 18%;
+  width: 65%;
   height: inherit;
 
   display: flex;
@@ -73,20 +73,9 @@ canvas {
 }
 .column-2 {
   //background-color: ivory;
-  width: 56%;
   height: inherit;
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.column-3 {
-  background-color: ghostwhite;
-  height: inherit;
-  margin-left: 10px;
-  padding: 5px 5px 15px;
   flex-grow: 1;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -95,17 +84,27 @@ canvas {
 .column-1-row-1 {
   background-color: ghostwhite;
   width: 100%;
-  height: 70%;
+  height: 35%;
   padding: 5px 15px 15px;
   box-sizing:border-box;
   
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
-.column-1-row-1 img {
-  width: 100%;
+.column-1-row-1 p {
+  text-align: justify;
+  line-height: 20px;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.preload { visibility: hidden; }
+
+.column-2-row-1 img {
+  width: 96px;
+  height: 96px;
   margin-bottom: 10px;
 }
 
@@ -145,62 +144,32 @@ canvas {
   justify-content: space-between;
   align-items: center;
 }
+.column-1-row-2 .row-container {
+  align-items: center;
+  justify-content: space-around;
+}
 
+.column-1-row-2 img {
+/*  width: 45%;
+  height: width;
+*/
+    width: 200px;
+    height: 200px;
+}
 
 .column-2-row-1 {
   background-color: ghostwhite;
   width: 100%;
-  height: 50%;
   padding: 5px 5px 15px;
+  //margin-top: 10px;
+  height: 60%;
+  //flex-grow: 1;
   box-sizing:border-box;
   
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.column-2-row-1-block-1 {
-  //background-color: lime;
-  width: 60%;
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
-
-.column-2-row-1-block-1 img {
-  height: 90%;
-}
-
-.column-2-row-1-block-2 {
-  background-color: ivory;
-  flex-grow: 1;
-  padding: 0 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.bar-label {
-  font-size: 20px;
-}
-.green-bar {
-  background-color: limegreen;
-  width: 120px;
-  height: 30px;
-  border-radius: 20px;
-  margin-bottom: 30px;
-}
-
-.red-bar {
-  background-color: crimson;
-  width: 100px;
-  height: 30px;
-  border-radius: 20px;
-  margin-bottom: 30px;
-
-}
-
 
 
 .column-2-row-2 {
@@ -213,7 +182,50 @@ canvas {
   
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.column-2-row-2-block-1 {
+  //background-color: lime;
+  width: 60%;
+  display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.column-2-row-2-block-1 img {
+  //height: 90%;
+  height: 96px;
+}
+
+.column-2-row-2-block-2 {
+  //background-color: ivory;
+  flex-grow: 1;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bar-label {
+  font-size: 16px;
+}
+.green-bar {
+  background-color: limegreen;
+  width: 150px;
+  height: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.red-bar {
+  background-color: crimson;
+  width: 100px;
+  height: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+
 }
 
 .row-block-subtitle {
@@ -261,6 +273,14 @@ canvas {
   flex-grow: 1;
   display: flex;
   }
+.timer-block {
+  //background-color: lightgray;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
 .column-2-row-2-row-column {
   //background-color: ivory;

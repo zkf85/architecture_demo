@@ -59,6 +59,3 @@ def pagerank(request):
   return render(request, 'demo/pagerank.html')
 
 
-def fpga_cloud_tf(request):
-    context = {}
-    return render(request, 'demo/fpga_cloud_tf.html', context)
