@@ -55,16 +55,16 @@
 			<div class="column-2-row-1">
 				<div class="block-title">Data Flow</div>
 				<div class="row-container">
-					<div class="column-2-row-2-block-1">
-						<img src='{% static "fpga_cloud/img/hello.jpg" %}'>
+					<div class="column-2-row-1-block-1">
+						<img src='{% static "fpga_cloud/img/hello.jpg" %}' id="png_image">
 					</div>
-					<div class="column-2-row-2-block-2">
-						<div class="bar-label" id="top_1">Airplane</div>
-						<div class="green-bar"></div>
-						<div class="bar-label">cup</div>
-						<div class="red-bar"></div>
-						<div class="bar-label">human</div>
-						<div class="red-bar"></div>
+					<div class="column-2-row-1-block-2">
+						<div class="bar-label" id="top_1_label">n/a</div>
+						<div class="green-bar" id="top_1_bar"></div>
+						<div class="bar-label" id="top_2_label">n/a</div>
+						<div class="red-bar" id="top_2_bar"></div>
+						<div class="bar-label" id="top_3_label">n/a</div>
+						<div class="red-bar" id="top_3_bar"></div>
 					</div>
 				</div>
 				<div class="column-container">
@@ -72,12 +72,12 @@
 					<div class="column-1-subtitle">Frame Number</div>
 					<div class="column-1-line">
 						<div class="column-1-number" id='step'></div>
-						<div class="column-1-unit">Fr</div>
+						<div class="column-1-unit">Frames</div>
 					</div>
 					<div class="column-1-subtitle">Energy Efficiency</div>
 					<div class="column-1-line">
 						<div class="column-1-number" id='watt'></div>
-						<div class="column-1-unit">W/img</div>
+						<div class="column-1-unit">Images/Watt</div>
 					</div>
 				</div>
 

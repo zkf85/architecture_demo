@@ -11,5 +11,5 @@ from . import views
 
 urlpatterns = [
     path('', views.fpga_cloud, name='fpga_cloud'),
-    path('ajax/update_small', views.ajax_update_small, name='ajax_update_small'),
+    path('ajax/update_img', views.ajax_update_img, name='ajax_update_img'),
 ]
