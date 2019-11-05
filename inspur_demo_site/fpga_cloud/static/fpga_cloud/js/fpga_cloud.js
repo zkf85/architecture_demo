@@ -19,7 +19,7 @@ step_increment  = 1;
 //max_step = 500;
 //max_step = 32900;
 max_step = 50;
-timer_interval = 20;
+timer_interval = 500;
 /* make a stop watch */
 var start = document.getElementById('start'),
 stop= document.getElementById('stop'),
