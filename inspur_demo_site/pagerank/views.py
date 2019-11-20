@@ -9,6 +9,7 @@ import subprocess
 base_dir = os.path.join(settings.BASE_DIR, 'pagerank')
 static_dir = os.path.join('static', 'pagerank')
 
+
 # Create your views here.
 def pagerank(request):
     context = {}
