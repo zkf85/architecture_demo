@@ -1,3 +1,4 @@
+// sync the gifs
 $(window).load(function() {
     $('.preload').attr('src', function(i,a){
         $(this).attr('src','')

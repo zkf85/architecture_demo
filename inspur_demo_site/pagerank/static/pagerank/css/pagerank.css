@@ -68,7 +68,7 @@ body {
 	//background-color: ghostwhite;
 	flex: 1;
 	height: inherit;
-
+	padding:0 120px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -257,7 +257,7 @@ body {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	width: 90%;
+	width: 100%;
 	table-layout: fixed;
 }
 
@@ -274,7 +274,17 @@ td, th {
 	color: white;
 }
 
+.green {
+	font-size: 36px;
+	color: lime;
+	font-weight: bold;
+}
 
+.orange {
+	font-size: 36px;
+	color: orangered;
+	font-weight: bold;
+}
 
 
 

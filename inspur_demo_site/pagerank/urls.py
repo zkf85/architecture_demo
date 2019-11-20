@@ -12,6 +12,5 @@ from . import views
 urlpatterns = [
     path('', views.pagerank, name='pagerank'),
     path('ajax/cpu', views.ajax_cpu, name='ajax_cpu'),
-    path('ajax/fpga_single', views.ajax_fpga_single, name='ajax_fpga_single'),
-    path('ajax/fpga_loop', views.ajax_fpga_loop, name='ajax_fpga_loop'),
+    path('ajax/fpga', views.ajax_fpga, name='ajax_fpga'),
 ]
