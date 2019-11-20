@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Rank Demo</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'pagerank/css/pagerank.css' %}">
+</head>
+
+<body>
+
+<div class="header"></div>
+
+<div class="banner">
+	<div class="title">PageRank算法FPGA平台演示系统</div>
+</div>
+
+<div class="content">
+	
+	<div class="column-1">
+		<div class="control-panel">
+			<div class="single-run-panel">
+				<div class="dataset">
+					<div class="dataset-button">数据集一</div> 
+					<div class="single-run-button">运行</div>
+				</div>
+				<div class="dataset">
+					<div class="dataset-button">数据集二</div> 
+					<div class="single-run-button">运行</div>
+				</div>
+			</div> 
+			<div class="run-button">开始</div>
+			<div class="stop-button">暂停</div>
+			<div class="reset-button">重置</div>
+		</div>
+		<div class="graph">
+
+		</div>
+	</div>
+
+	<div class="column-2">
+
+		<table>
+			<colgroup>
+		    <col class="twenty" />
+		    <col class="twenty" />
+		    <col class="twenty" />
+		    <col class="twenty" />
+		    <col class="twenty" />
+		  </colgroup>
+			<thead>
+				<tr>
+					<th>
+					</th>
+					<th colspan="2">
+						<h2>FPGA</h2>
+					</th>
+					<th colspan="2">
+						<h2>CPU</h2>
+					</th>
+				</tr>
+			</thead>
+			<thead>
+				<tr class="table-head">
+					<th>Rank</th>
+					<th>昵称</th>
+					<th>PR</th>
+					<th>昵称</th>
+					<th>PR</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td id="f-id-1"></td>
+					<td id="f-pr-1"></td>
+					<td id="c-id-1"></td>
+					<td id="c-pr-1"></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td id="f-id-2"></td>
+					<td id="f-pr-2"></td>
+					<td id="c-id-2"></td>
+					<td id="c-pr-2"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td id="f-id-3"></td>
+					<td id="f-pr-3"></td>
+					<td id="c-id-3"></td>
+					<td id="c-pr-3"></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td id="f-id-4"></td>
+					<td id="f-pr-4"></td>
+					<td id="c-id-4"></td>
+					<td id="c-pr-4"></td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td id="f-id-5"></td>
+					<td id="f-pr-5"></td>
+					<td id="c-id-5"></td>
+					<td id="c-pr-5"></td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td id="f-id-6"></td>
+					<td id="f-pr-6"></td>
+					<td id="c-id-6"></td>
+					<td id="c-pr-6"></td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td id="f-id-7"></td>
+					<td id="f-pr-7"></td>
+					<td id="c-id-7"></td>
+					<td id="c-pr-7"></td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td id="f-id-8"></td>
+					<td id="f-pr-8"></td>
+					<td id="c-id-8"></td>
+					<td id="c-pr-8"></td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td id="f-id-9"></td>
+					<td id="f-pr-9"></td>
+					<td id="c-id-9"></td>
+					<td id="c-pr-9"></td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td id="f-id-10"></td>
+					<td id="f-pr-10"></td>
+					<td id="c-id-10"></td>
+					<td id="c-pr-10"></td>
+				</tr>
+
+			</tbody>
+
+		</table>
+
+
+		<table>
+			<thead>
+				<tr>
+					<th>性能参数</th>
+					<th>
+						<h2>FPGA</h2>
+					</th>
+					<th>
+						<h2>CPU</h2>
+					</th>
+				</tr>
+
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>Dataset</td>
+					<td id="dataset" colspan="2"></td>
+				</tr>
+				<tr>
+					<td>Total Edges</td>
+					<td id="f-counter"></td>
+					<td id="c-counter"></td>
+				</tr>
+				<tr>
+					<td>Time per Loop</td>
+					<td id="f-time-per-loop"></td>
+					<td id="c-time-per-loop"></td>
+				</tr>
+				<tr>
+					<td>MTEPS</td>
+					<td id="f-mteps"></td>
+					<td id="c-mteps"></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+</div>
+
+<div class="footer"></div>
+
+</body>
+</html>

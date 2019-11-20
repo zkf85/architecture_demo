@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('demos/', include('demo.urls')),
-    path('', include('fpga_cloud.urls')),
+    path('fpga_cloud/', include('fpga_cloud.urls')),
+    path('', include('pagerank.urls')),
     path('admin/', admin.site.urls),
 ]
