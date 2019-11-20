@@ -99,7 +99,7 @@ function add_fpga() {
 		tmp = 2
 	else
 		tmp = 1
-	console.log('fpga')
+	//console.log('fpga')
 	$.ajax({
 		//async: false,
 		type: 'get',
@@ -123,7 +123,7 @@ function add_fpga() {
 }
 
 function add_cpu() {
-	console.log('cpu')
+	//console.log('cpu')
 	$.ajax({
 		//async: false,
 		type: 'get',
