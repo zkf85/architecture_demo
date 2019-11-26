@@ -12,10 +12,23 @@ import random
 base_dir = os.path.join(settings.BASE_DIR, 'pagerank')
 static_dir = os.path.join('static', 'pagerank')
 
-
 #===============================================================================
 # init for plan A
 #===============================================================================
+fpga_project_dir = '/home/lzh/zynqmp_Xilinx_Answer_65444_Linux_Files-new-191108/tests'
+data_file = 'weibo.txt'
+fpga_program = 'pagerank.sh'
+fpga_txt = 'pagerank_result.txt'
+
+# get the edge number and node number of the input data
+with open(os.path.join(fpga_project_dir, data_file), 'r') as f:                                                      
+    id_list = f.read().split()                                                     
+id_list = [int(i) for i in id_list]
+id_set = set(id_list)  
+edge_num = len(id_list) // 2
+node_num = len(id_set)
+print('[kf info] weibo data loaded, the total number of edges is:', edge_num)
+print('[kf info] weibo data loaded, the total number of nodes is:', node_num)
 
 #===============================================================================
 # init for plan B
@@ -33,8 +46,8 @@ edges_2 = 13.978716
 niters = 10
 
 # Set the plan option
-#plan = 'A'
-plan = 'B'
+plan = 'A'
+#plan = 'B'
 
 # Create your views here.
 def pagerank(request):
@@ -49,17 +62,16 @@ def ajax_cpu(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        print('plan A')
+        pass
     
-    #===========================================================================
-    # add random anomaly
-    #===========================================================================
-    anomaly = (random.random() - 0.5) * 2 * 2
 
     #===========================================================================
     # plan B
     #===========================================================================
     if plan == 'B':
+        # add random anomaly
+        anomaly = (random.random() - 0.5) * 2 * 2
+
         if option == '1':
             return_json['id_list'] = [i[0] for i in real_list1]
             return_json['pr_list'] = [i[1] for i in real_list1]
@@ -89,17 +101,42 @@ def ajax_fpga(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        print('plan A')
+        cur_path = os.getcwd()
+        os.chdir(fpga_project_dir)
+        subprocess.run(['sh', fpga_program])
 
-    #===========================================================================
-    # add random anomaly
-    #===========================================================================
-    anomaly = (random.random() - 0.5) * 2 * 0.0001
+        # read the resulting txt file
+        with open(fpga_txt, 'r') as f:
+            result = f.read().split()
+
+        # parse the resulting txt file into python
+        # 1. processing time in the first line
+        processing_time = result[0]
+        # 2. pr values from line 3 to the end
+        pr = result[2:]
+        pr_zip = []
+        for ind, val in enumerate(pr):
+            pr_zip.append((ind + 1, val))
+    
+        # sort the list based on pr value
+        pr_zip.sort(key=lambda x: x[1], reverse=True)
+
+        return_json['id_list'] = [i[0] for i in pr_zip[:20]
+        return_json['pr_list'] = [i[1] for i in pr_zip[:20]
+        return_json['time'] = processing_time
+        return_json['edges'] = edge_num
+        return_json['mteps'] = "%.2f" % (edges_1 * niters / (fpga_time_1 + anomaly))
+
+        # change the working directory back to the original one
+        os.chdir(cur_path)
 
     #===========================================================================
     # plan B
     #===========================================================================
     if plan == 'B':
+        # add random anomaly
+        anomaly = (random.random() - 0.5) * 2 * 0.0001
+
         if option == '1':
             return_json['id_list'] = [i[0] for i in real_list1]
             return_json['pr_list'] = [i[1] for i in real_list1]
