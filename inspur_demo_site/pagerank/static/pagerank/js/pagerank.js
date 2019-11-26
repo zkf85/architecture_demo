@@ -52,7 +52,6 @@ $("#dataset1-run").click(function () {
 		data: { 'dataset': 1},
 		data_type: 'json',
 		success: function(ret) {
-			f_total_edges += ret['edges']
 			for (i=0; i < ret['id_list'].length; i++) {
 		        $(`#f-id-${i+1}`).text(ret['id_list'][i])
 		        $(`#f-pr-${i+1}`).text(ret['pr_list'][i].toFixed(2))
@@ -60,7 +59,7 @@ $("#dataset1-run").click(function () {
 
         	$('#f-counter').text(f_total_edges.toFixed(2))
         	$('#f-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#f-mteps').text(ret['mteps'].toFixed(4))
+        	$('#f-mteps').text(ret['mteps'].toFixed(2))
 		}      
 	})
 });
@@ -98,7 +97,7 @@ $("#dataset2-run").click(function () {
 
         	$('#f-counter').text(f_total_edges.toFixed(2))
         	$('#f-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#f-mteps').text(ret['mteps'].toFixed(4))
+        	$('#f-mteps').text(ret['mteps'].toFixed(2))
 		}      
 	})
 });
@@ -150,7 +149,7 @@ function add_fpga() {
 
         	$('#f-counter').text(f_total_edges.toFixed(2))
         	$('#f-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#f-mteps').text(ret['mteps'])
+        	$('#f-mteps').text(ret['mteps'].toFixed(2))
 
 			timer_fpga();
 		}      
@@ -174,7 +173,7 @@ function add_cpu() {
 
         	$('#c-counter').text(c_total_edges.toFixed(2))
         	$('#c-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#c-mteps').text(ret['mteps'])
+        	$('#c-mteps').text(ret['mteps'].toFixed(4))
         	/* switch dataset using option */
         	if (option == 1) {
 	        	$('#dataset').text('数据集一')
