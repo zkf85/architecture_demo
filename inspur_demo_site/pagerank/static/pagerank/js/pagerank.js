@@ -42,7 +42,7 @@ $("#dataset1-run").click(function () {
         	$('#dataset').text('数据集一')
         	$('#c-counter').text(ret['edges'])
         	$('#c-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#c-mteps').text(ret['mteps'])
+        	$('#c-mteps').text(ret['mteps'].toFixed(4))
 		}      
 	})
 	$.ajax({
@@ -60,7 +60,7 @@ $("#dataset1-run").click(function () {
 
         	$('#f-counter').text(f_total_edges.toFixed(2))
         	$('#f-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#f-mteps').text(ret['mteps'])
+        	$('#f-mteps').text(ret['mteps'].toFixed(4))
 		}      
 	})
 });
@@ -80,7 +80,7 @@ $("#dataset2-run").click(function () {
         	$('#dataset').text('数据集二')
         	$('#c-counter').text(ret['edges'])
         	$('#c-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#c-mteps').text(ret['mteps'])
+        	$('#c-mteps').text(ret['mteps'].toFixed(4))
 		}      
 	})
 	$.ajax({
@@ -98,7 +98,7 @@ $("#dataset2-run").click(function () {
 
         	$('#f-counter').text(f_total_edges.toFixed(2))
         	$('#f-time-per-loop').text(ret['time'].toFixed(4))
-        	$('#f-mteps').text(ret['mteps'])
+        	$('#f-mteps').text(ret['mteps'].toFixed(4))
 		}      
 	})
 });

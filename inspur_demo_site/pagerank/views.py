@@ -5,6 +5,7 @@ import json
 import os                                                                       
 import requests                                                                 
 import subprocess    
+import re
 
 import time
 import random
@@ -12,9 +13,14 @@ import random
 base_dir = os.path.join(settings.BASE_DIR, 'pagerank')
 static_dir = os.path.join('static', 'pagerank')
 
+
 #===============================================================================
 # init for plan A
 #===============================================================================
+current_path = os.getcwd()
+graphchi_run_path = '/root/pagerank_graphchi/graphchi-cpp'
+graphchi_result_report_file_path = '/root/pagerank_graphchi/datasets/odd/report_full.txt'
+
 fpga_project_dir = '/home/lzh/zynqmp_Xilinx_Answer_65444_Linux_Files-new-191108/tests'
 data_file = 'weibo.txt'
 fpga_program = 'pagerank.sh'
@@ -62,8 +68,37 @@ def ajax_cpu(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        pass
-    
+        real_list1 = []
+        num_flag = 0
+        os.chdir(graphchi_run_path)
+        subprocess.run(['sh', 'kfrun.sh'])
+        os.chdir(current_path)
+        #=======================================================================
+        # read imformation from report_full.txt
+        #=======================================================================
+        with open(graphchi_result_report_file_path, 'r') as graphchi_report_file:
+            report_list = graphchi_report_file.readlines()
+
+        for current_list in report_list:
+            split_list = list(re.split('[: \t]', current_list.strip('\n')))
+
+            if split_list[0] == '1.':
+                num_flag += 1
+            if split_list[0] == '20.':
+                num_flag = 0
+            if num_flag == 1:
+                real_list1.append([split_list[1], float(split_list[2])])
+
+            # catch the run time
+            if split_list[0] == 'runtime':
+                print('CPU run PageRank use time:', split_list[3])
+                cpu_time = float(split_list[3])
+
+        return_json['id_list'] = [i[0] for i in real_list1]
+        return_json['pr_list'] = [i[1] for i in real_list1]
+        return_json['time'] = cpu_time
+        return_json['edges'] = edge_num
+        return_json['mteps'] = edge_num / cpu_time_1 / 1e6
 
     #===========================================================================
     # plan B
@@ -89,8 +124,6 @@ def ajax_cpu(request):
             time.sleep(cpu_time_2)
             print('cpu processing time:', cpu_time_2 + anomaly)
 
-    
-
     return HttpResponse(json.dumps(return_json), content_type='application/json')
 
 def ajax_fpga(request):
@@ -101,34 +134,43 @@ def ajax_fpga(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        cur_path = os.getcwd()
         os.chdir(fpga_project_dir)
         subprocess.run(['sh', fpga_program])
 
+        print('fpga_program is done!!!!')
         # read the resulting txt file
-        with open(fpga_txt, 'r') as f:
+        with open(os.path.join(fpga_project_dir, fpga_txt), 'r') as f:
             result = f.read().split()
 
+        result = [float(i) for i in result]
         # parse the resulting txt file into python
         # 1. processing time in the first line
         processing_time = result[0]
         # 2. pr values from line 3 to the end
-        pr = result[2:]
+        #pr = result[2:]
+        ########################################################################
+        # CHANGES HERE!!!!
+        pr = [15*1000*i for i in result[2:]]
+        ########################################################################
         pr_zip = []
         for ind, val in enumerate(pr):
-            pr_zip.append((ind + 1, val))
+            ####################################################################
+            # PROGLEM HERE!!!
+            pr_zip.append((ind + 2, val))
+            ####################################################################
     
         # sort the list based on pr value
         pr_zip.sort(key=lambda x: x[1], reverse=True)
+        #print('pr-3', pr_zip)
 
-        return_json['id_list'] = [i[0] for i in pr_zip[:20]
-        return_json['pr_list'] = [i[1] for i in pr_zip[:20]
+        return_json['id_list'] = [i[0] for i in pr_zip[:20]]
+        return_json['pr_list'] = [i[1] for i in pr_zip[:20]]
         return_json['time'] = processing_time
         return_json['edges'] = edge_num
-        return_json['mteps'] = "%.2f" % (edges_1 * niters / (fpga_time_1 + anomaly))
+        return_json['mteps'] = edge_num / processing_time / 1E6
 
         # change the working directory back to the original one
-        os.chdir(cur_path)
+        os.chdir(current_path)
 
     #===========================================================================
     # plan B
