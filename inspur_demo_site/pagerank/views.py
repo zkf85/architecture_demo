@@ -27,14 +27,18 @@ fpga_program = 'pagerank.sh'
 fpga_txt = 'pagerank_result.txt'
 
 # get the edge number and node number of the input data
-with open(os.path.join(fpga_project_dir, data_file), 'r') as f:                                                      
-    id_list = f.read().split()                                                     
-id_list = [int(i) for i in id_list]
-id_set = set(id_list)  
-edge_num = len(id_list) // 2
-node_num = len(id_set)
-print('[kf info] weibo data loaded, the total number of edges is:', edge_num)
-print('[kf info] weibo data loaded, the total number of nodes is:', node_num)
+
+if not os.path.exists(os.path.join(fpga_project_dir, data_file)):
+    print('[kf info] data_file not found!!!')
+else:
+    with open(os.path.join(fpga_project_dir, data_file), 'r') as f:                                                      
+        id_list = f.read().split()                                                     
+    id_list = [int(i) for i in id_list]
+    id_set = set(id_list)  
+    edge_num = len(id_list) // 2
+    node_num = len(id_set)
+    print('[kf info] weibo data loaded, the total number of edges is:', edge_num)
+    print('[kf info] weibo data loaded, the total number of nodes is:', node_num)
 
 #===============================================================================
 # init for plan B
@@ -63,12 +67,14 @@ def pagerank(request):
 def ajax_cpu(request):
     # choose from dataset-1/2
     option = request.GET.get('dataset')
+    plan = request.GET.get('plan')
+    print('plan is:', plan)
     return_json = {}
     #===========================================================================
     # plan A
     #===========================================================================
     if plan == 'A':
-        real_list1 = []
+        cpu_list = []
         num_flag = 0
         os.chdir(graphchi_run_path)
         subprocess.run(['sh', 'kfrun.sh'])
@@ -87,15 +93,15 @@ def ajax_cpu(request):
             if split_list[0] == '20.':
                 num_flag = 0
             if num_flag == 1:
-                real_list1.append([split_list[1], float(split_list[2])])
+                cpu_list.append([split_list[1], float(split_list[2])])
 
             # catch the run time
             if split_list[0] == 'runtime':
                 print('CPU run PageRank use time:', split_list[3])
                 cpu_time = float(split_list[3])
 
-        return_json['id_list'] = [i[0] for i in real_list1]
-        return_json['pr_list'] = [i[1] for i in real_list1]
+        return_json['id_list'] = [i[0] for i in cpu_list]
+        return_json['pr_list'] = [i[1] for i in cpu_list]
         return_json['time'] = cpu_time
         return_json['edges'] = edge_num
         return_json['mteps'] = edge_num / cpu_time_1 / 1e6
@@ -112,7 +118,7 @@ def ajax_cpu(request):
             return_json['pr_list'] = [i[1] for i in real_list1]
             return_json['time'] = cpu_time_1 + anomaly
             return_json['edges'] = edges_1
-            return_json['mteps'] = "%.2f" % (edges_1 * niters / (cpu_time_1 + anomaly))
+            return_json['mteps'] = edges_1 * niters / (cpu_time_1 + anomaly)
             time.sleep(cpu_time_1)
             print('cpu processing time:', cpu_time_1 + anomaly)
         if option == '2':
@@ -120,7 +126,7 @@ def ajax_cpu(request):
             return_json['pr_list'] = [i[1] for i in real_list2]
             return_json['time'] = cpu_time_2 + anomaly
             return_json['edges'] = edges_2
-            return_json['mteps'] = "%.2f" % (edges_2 * niters / (cpu_time_2 + anomaly))
+            return_json['mteps'] = edges_2 * niters / (cpu_time_2 + anomaly)
             time.sleep(cpu_time_2)
             print('cpu processing time:', cpu_time_2 + anomaly)
 
@@ -129,6 +135,10 @@ def ajax_cpu(request):
 def ajax_fpga(request):
 
     option = request.GET.get('dataset')
+
+    plan = request.GET.get('plan')
+    print('plan is:', plan)
+
     return_json = {}
     #===========================================================================
     # plan A
@@ -184,7 +194,7 @@ def ajax_fpga(request):
             return_json['pr_list'] = [i[1] for i in real_list1]
             return_json['time'] = fpga_time_1 + anomaly
             return_json['edges'] = edges_1
-            return_json['mteps'] = "%.2f" % (edges_1 * niters / (fpga_time_1 + anomaly))
+            return_json['mteps'] = edges_1 * niters / (fpga_time_1 + anomaly)
             time.sleep(fpga_time_1)
             print('fpga processing time:', fpga_time_1 + anomaly)
         if option == '2':
@@ -192,7 +202,7 @@ def ajax_fpga(request):
             return_json['pr_list'] = [i[1] for i in real_list2]
             return_json['time'] = fpga_time_2 + anomaly
             return_json['edges'] = edges_2 
-            return_json['mteps'] = "%.2f" % (edges_2 * niters / (fpga_time_2 + anomaly))
+            return_json['mteps'] = edges_2 * niters / (fpga_time_2 + anomaly)
             time.sleep(fpga_time_2)
             print('fpga processing time:', fpga_time_2 + anomaly)
 

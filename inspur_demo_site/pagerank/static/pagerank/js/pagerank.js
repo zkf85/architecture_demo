@@ -1,3 +1,31 @@
+var plan_flag = 'B';
+
+$(document).ready(function() {
+	$("#onoffswitch").on('click', function(){
+		clickSwitch()
+	});
+ 
+	var clickSwitch = function() {
+
+		stop_flag = true
+		clearTimeout(t_fpga);
+		clearTimeout(t_cpu);
+		clear_data();
+		f_total_edges = 0;
+		c_total_edges = 0;
+		option = 1;
+
+		if ($("#onoffswitch").is(':checked')) {
+			//console.log("在ON的状态下");
+			plan_flag = 'A'
+		} else {
+			//console.log("在OFF的状态下");
+			plan_flag = 'B'
+		}
+	};
+});
+
+
 function clear_data() {
 	for (i=0; i < list_length; i++) {
 	    $(`#f-id-${i+1}`).text('')
@@ -32,7 +60,7 @@ $("#dataset1-run").click(function () {
 		//async: false,
 		type: 'get',
 		url: '/ajax/cpu',
-		data: { 'dataset': 1},
+		data: { 'dataset': 1, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			for (i=0; i < ret['id_list'].length; i++) {
@@ -49,7 +77,7 @@ $("#dataset1-run").click(function () {
 		//async: false,
 		type: 'get',
 		url: '/ajax/fpga',
-		data: { 'dataset': 1},
+		data: { 'dataset': 1, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			for (i=0; i < ret['id_list'].length; i++) {
@@ -69,7 +97,7 @@ $("#dataset2-run").click(function () {
 		//async: false,
 		type: 'get',
 		url: '/ajax/cpu',
-		data: { 'dataset': 2},
+		data: { 'dataset': 2, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			for (i=0; i < ret['id_list'].length; i++) {
@@ -86,7 +114,7 @@ $("#dataset2-run").click(function () {
 		//async: false,
 		type: 'get',
 		url: '/ajax/fpga',
-		data: { 'dataset': 2},
+		data: { 'dataset': 2, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			f_total_edges += ret['edges']
@@ -138,7 +166,7 @@ function add_fpga() {
 		//async: false,
 		type: 'get',
 		url: '/ajax/fpga',
-		data: { 'dataset': tmp},
+		data: { 'dataset': tmp, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			f_total_edges += ret['edges']
@@ -162,7 +190,7 @@ function add_cpu() {
 		//async: false,
 		type: 'get',
 		url: '/ajax/cpu',
-		data: { 'dataset': option},
+		data: { 'dataset': option, 'plan': plan_flag},
 		data_type: 'json',
 		success: function(ret) {
 			c_total_edges += ret['edges']
@@ -173,6 +201,8 @@ function add_cpu() {
 
         	$('#c-counter').text(c_total_edges.toFixed(2))
         	$('#c-time-per-loop').text(ret['time'].toFixed(4))
+        	//console.log('this is the mteps!!!')
+        	//console.log(ret['mteps'])
         	$('#c-mteps').text(ret['mteps'].toFixed(4))
         	/* switch dataset using option */
         	if (option == 1) {
