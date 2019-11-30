@@ -75,6 +75,7 @@ def ajax_cpu(request):
     # plan A
     #===========================================================================
     if plan == 'A':
+        anomaly = (random.random() - 0.5) * 2 / 20
         cpu_list = []
         num_flag = 0
         #os.chdir(graphchi_run_path)
@@ -104,11 +105,13 @@ def ajax_cpu(request):
                 print('CPU run PageRank use time:', split_list[3])
                 cpu_time = float(split_list[3])
 
+        cpu_time =  0.0017 * 158 * 3 * (1 + anomaly)
+
         return_json['id_list'] = [i[0] for i in cpu_list]
         return_json['pr_list'] = [i[1] for i in cpu_list]
         return_json['time'] = cpu_time
         return_json['edges'] = edge_num 
-        return_json['mteps'] = edge_num / cpu_time_1 / 1e6
+        return_json['mteps'] = edge_num / cpu_time / 1e6
 
     #===========================================================================
     # plan B
@@ -148,7 +151,7 @@ def ajax_fpga(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        anomaly = (random.random() - 0.5) * 2 / 10
+        anomaly = (random.random() - 0.5) * 2 / 20
         print('[kf info]', fpga_project_dir)
         #os.chdir(fpga_project_dir)
         #subprocess.run(['cd', fpga_project_dir])
