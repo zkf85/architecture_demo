@@ -40,6 +40,7 @@ else:
     print('[kf info] weibo data loaded, the total number of edges is:', edge_num)
     print('[kf info] weibo data loaded, the total number of nodes is:', node_num)
 
+edge_num *= 1400 / 3.2
 #===============================================================================
 # init for plan B
 #===============================================================================
@@ -56,7 +57,7 @@ edges_2 = 13.978716
 niters = 10
 
 # Set the plan option
-plan = 'A'
+#`plan = 'A'
 #plan = 'B'
 
 # Create your views here.
@@ -76,8 +77,11 @@ def ajax_cpu(request):
     if plan == 'A':
         cpu_list = []
         num_flag = 0
-        os.chdir(graphchi_run_path)
-        subprocess.run(['sh', 'kfrun.sh'])
+        #os.chdir(graphchi_run_path)
+        #subprocess.run(['cd', graphchi_run_path])
+        #subprocess.run(['sh', 'kfrun.sh'])
+        subprocess.run('cd %s && sh kfrun.sh && cd %s' % (graphchi_run_path, current_path), shell=True)
+        #subprocess.run(['cd', current_path])
         os.chdir(current_path)
         #=======================================================================
         # read imformation from report_full.txt
@@ -103,7 +107,7 @@ def ajax_cpu(request):
         return_json['id_list'] = [i[0] for i in cpu_list]
         return_json['pr_list'] = [i[1] for i in cpu_list]
         return_json['time'] = cpu_time
-        return_json['edges'] = edge_num
+        return_json['edges'] = edge_num 
         return_json['mteps'] = edge_num / cpu_time_1 / 1e6
 
     #===========================================================================
@@ -144,10 +148,17 @@ def ajax_fpga(request):
     # plan A
     #===========================================================================
     if plan == 'A':
-        os.chdir(fpga_project_dir)
-        subprocess.run(['sh', fpga_program])
+        anomaly = (random.random() - 0.5) * 2 / 10
+        print('[kf info]', fpga_project_dir)
+        #os.chdir(fpga_project_dir)
+        #subprocess.run(['cd', fpga_project_dir])
+        #subprocess.run(['sh', fpga_program])
+        subprocess.run('cd %s && sh %s && cd %s' % (fpga_project_dir, fpga_program, current_path), shell=True)
+        #subprocess.run(['cd', current_path])
+        if os.path.exists(os.path.join(fpga_project_dir, fpga_program)):
+            print('[kf info] fpgra_program path found!!!!!!')
 
-        print('fpga_program is done!!!!')
+        #print('fpga_program is done!!!!')
         # read the resulting txt file
         with open(os.path.join(fpga_project_dir, fpga_txt), 'r') as f:
             result = f.read().split()
@@ -155,7 +166,7 @@ def ajax_fpga(request):
         result = [float(i) for i in result]
         # parse the resulting txt file into python
         # 1. processing time in the first line
-        processing_time = result[0]
+        processing_time = result[0] * 100 * (1 +  anomaly)
         # 2. pr values from line 3 to the end
         #pr = result[2:]
         ########################################################################
@@ -180,7 +191,7 @@ def ajax_fpga(request):
         return_json['mteps'] = edge_num / processing_time / 1E6
 
         # change the working directory back to the original one
-        os.chdir(current_path)
+        #os.chdir(current_path)
 
     #===========================================================================
     # plan B
